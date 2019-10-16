@@ -18,8 +18,8 @@ if ( ! function_exists('asset_url')) {
 	}
 }
 
-if ( ! function_exists('setting')) {
-	function setting($setting) {
+if ( ! function_exists('site_info')) {
+	function site_info($setting) {
 		$ci =& get_instance();
 		return $ci->settingsModel->get($setting);
 	}
