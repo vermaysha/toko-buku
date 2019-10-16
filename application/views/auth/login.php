@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </form>
 
-    <a href="<?php echo base_url('auth/forgot-password');?>">I forgot my password</a><br>
-    <a href="<?php echo base_url('auth/register')?>" class="text-center">Register a new membership</a>
+    <a href="<?php echo base_url('forgot-password');?>">I forgot my password</a><br>
+    <a href="<?php echo base_url('register')?>" class="text-center">Register a new membership</a>
 
   </div>

@@ -41,5 +41,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </form>
 
-    <a href="<?php echo base_url('auth/login');?>" class="text-center">I already have a membership</a>
+    <a href="<?php echo base_url('login');?>" class="text-center">I already have a membership</a>
   </div>
