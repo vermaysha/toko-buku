@@ -29,12 +29,13 @@ class Template
 	/**
 	 * Set Template Args
 	 *
-	 * @param $key Key
-	 * @param $val Value
+	 * @param $arr 
 	 * @return Bool
 	 */
-	public function setArgs($key, $val) {
-		$this->_args[$key] = $val;
+	public function setArgs($arr) {
+		foreach ($arr as $key => $val) {
+			$this->_args[$key] = $val;
+		}
 		return true;
 	}
 	
@@ -44,7 +45,7 @@ class Template
 	 * @return void
 	 */
 	public function display($template, $section) {
-		$_args['contents'] = $this->load->view($section, $this->_args, true);
+		$_args['contents'] = $this->_ci->load->view($section, $this->_args, true);
 		return $this->_ci->load->view($template, array_merge($_args, $this->_args));
 	}
 }

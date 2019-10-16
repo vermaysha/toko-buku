@@ -25,7 +25,7 @@ class Authentication
 	 * @return Bool
 	 */
 	public function isAuthenticated() {
-		return $this->_ci->session->has_userdata('username') && 
+		return $this->_ci->session->has_userdata('username') &&
 			   $this->_ci->session->has_userdata('id');
 	}
 	
@@ -37,8 +37,11 @@ class Authentication
 	 * @return Bool
 	 */
 	public function create($username, $id) {
-		return $this->_ci->session->set_userdata('username', $username) &&
-			   $this->_ci->session->set_userdata('id', $id);
+		return $this->_ci->session->set_userdata([
+			'username' => $username,
+			'id' => $id,
+			'logged_in' => true
+		]);
 	}
 	
 	/**
@@ -47,8 +50,7 @@ class Authentication
 	 * @return Bool
 	 */
 	public function destroyAuth() {
-		$this->_ci->sesison->sess_destroy();
-		return true;
+		return $this->_ci->session->sess_destroy();
 	}
 	
 	/**

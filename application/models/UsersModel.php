@@ -28,7 +28,7 @@ class UsersModel extends CI_Model
 						 ->get('users_meta')
 						 ->row();
 						 
-		return $this->_savedUsersMeta[$id][$key] = $meta->meta_key;
+		return $this->_savedUsersMeta[$id][$key] = $meta->meta_value;
 	}
 	
 	/**
@@ -38,9 +38,33 @@ class UsersModel extends CI_Model
 	 * @return Object
 	 */
 	public function getUser($username) {
-		return $this->db->select(['password', 'level', 'last_activity', 'remember_token'])
-						->where('username', $username)
+		return $this->db->where('username', $username)
 						->get('users')
 						->row();
+	}
+	
+	public function insert($username, $password, $data = []) {
+		$status = $this->db->insert('users', [
+			'username' => $username,
+			'password' => password_hash($password, PASSWORD_ARGON2I),
+			'level' => 'user'
+		]);
+		
+		$userId = $this->db->insert_id();
+		
+		$meta = [];
+		foreach ($data as $key => $val) {
+			$meta[] = [
+				'meta_key' => $key,
+				'meta_value' => $val,
+				'id_user' => $userId
+			];
+		}
+		
+		return $status && $this->db->insert_batch('users_meta', $meta);
+	}
+	
+	public function updateLastLogin($username) {
+		return $this->db->set('last_login', date('Y-m-d H:i:s'))->where('username', $username)->update('users');
 	}
 }
