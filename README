@@ -17,7 +17,7 @@ Adalah aplikasi penjualan buku menggunakan CodeIgniter, dan dirilis dibawah lise
 3. Jalankan perintah `git remote add upstream https://github.com/asharyver/toko-buku.git`
 4. Jalankan perintah `git fetch upstream`
 5. Jalankan perintah `git merge upstream/master`
-6. Ignore dulu file konfigurasi databasemu dengan cara, `git rm --cached application/config/database.php`, lakukan disetiap branch. agar konfigurasimu tidak terupload kerepo ini.
+6. Ignore dulu file konfigurasi databasemu dengan cara, `git update-index --assume-unchanged application/config/database.php`. agar konfigurasimu tidak terupload kerepo ini.
 7. Buatlah sebuah branch baru
 8. Lakukan perubahan
 9. Lakukan push terhadap branch ke repomu
