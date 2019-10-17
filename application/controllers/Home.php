@@ -20,6 +20,8 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
+		$args['page_name'] = 'Beranda';
+		$this->template->setArgs($args);
 		$this->template->display('layouts/home', 'home/book_list');
 	}
 }
