@@ -43,7 +43,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('dashboard');?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b><i class="fa fa-dashboard"></i></b></span>
       <!-- logo for regular state and mobile devices -->
@@ -332,7 +332,7 @@
             </span>
           </a>
         </li> -->
-        <li class="treeview">
+        <li class="treeview <?php echo active_sidebar('products');?>">
           <a href="#">
             <i class="fa fa-book"></i>
             <span>Products</span>
@@ -341,8 +341,21 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('dashboard/products/add-new');?>">Add new products</a></li>
+            <li><a href="<?php echo base_url('dashboard/products/add-new');?>">Add new product</a></li>
             <li><a href="<?php echo base_url('dashboard/products');?>">View all products</a></li>
+          </ul>
+        </li>
+        <li class="treeview <?php echo active_sidebar('category');?>">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Categories</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('dashboard/category/add-new');?>">Add new category</a></li>
+            <li><a href="<?php echo base_url('dashboard/category');?>">View all categories</a></li>
           </ul>
         </li>
         <li class="treeview">

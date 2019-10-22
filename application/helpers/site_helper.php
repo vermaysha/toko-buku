@@ -24,3 +24,11 @@ if ( ! function_exists('site_info')) {
 		return $ci->settingsModel->get($setting);
 	}
 }
+
+if ( ! function_exists('active_sidebar')) {
+	function active_sidebar($name) {
+		$url = substr(current_url(), strlen(base_url()));
+		$urlArray = explode('/', $url);
+		return isset($urlArray[1]) && $urlArray[1] == $name ? 'active' : null;
+	}
+}
