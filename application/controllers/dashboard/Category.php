@@ -6,6 +6,10 @@ class Category extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('categoryModel');
+		
+		if ( ! $this->authentication->isAuthenticated()) {
+			redirect('login');
+		}
 	}
 
 	public function index()

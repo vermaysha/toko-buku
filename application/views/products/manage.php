@@ -31,6 +31,18 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
+              <?php if (! empty($success)):?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p><?php echo $success;?></p>
+              </div>
+              <?php endif;?>
+              <?php if (! empty($error)):?>
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p><?php echo $error;?></p>
+              </div>
+              <?php endif;?>
               <table class="table table-bordered table-hover">
                 <tr>
                   <th>#</th>
@@ -38,16 +50,20 @@
                   <th>Judul</th>
                   <th>Pengarang</th>
                   <th>Penerbit</th>
+                  <th>Kategori</th>
                   <th>Action</th>
                 </tr>
+                <?php $i=1; foreach($products as $prod):?>
                 <tr>
-                  <td>1</td>
-                  <td><img src="<?php echo base_url('assets/dashboard/products/60x60.png');?>" alt="60x60"></td>
-                  <td>Ketika Kekasihku adalah Kakakku</td>
-                  <td><span class="label label-success">Muslim Ariyadi</span></td>
-                  <td><span class="label label-warning">Udara langga</span></td>
-                  <td><a href="<?php echo base_url('products/delete/1');?>" title="Hapus buku" class="btn btn-danger">Hapus</a> <a href="<?php echo base_url('products/edit/1');?>" title="Ubah buku" class="btn btn-primary">Ubah</a></td>
+                  <td><?php echo $i;?></td>
+                  <td><img src="<?php echo base_url(get_image($prod->path));?>" class="img-responsive" alt="<?php echo $prod->title;?>"></td>
+                  <td><?php echo $prod->title;?></td>
+                  <td><span class="label label-success"><?php echo $prod->author;?></span></td>
+                  <td><span class="label label-warning"><?php echo $prod->publisher;?></span></td>
+                  <td><span class="label label-info"><?php echo $prod->name;?></span></td>
+                  <td><a href="<?php echo base_url('dashboard/products/delete/'.$prod->id_book);?>" title="Hapus buku" class="btn btn-danger">Hapus</a> <a href="<?php echo base_url('dashboard/products/edit/'.$prod->id_book);?>" title="Ubah buku" class="btn btn-primary">Ubah</a></td>
                 </tr>
+                <?php $i++; endforeach;?>
               </table>
             </div>
             <!-- /.box-body -->

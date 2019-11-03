@@ -35,13 +35,13 @@ class CategoryModel extends CI_Model
 			$limitStr = "LIMIT $offset,$limit";
 		}
 		return $this->db->query("SELECT `category`.`id`, `category`.`name`, `category`.`permalink`, " .
-						" (SELECT COUNT(`id`) FROM `books` WHERE `books`.`id_category` = `category`.`id` ) AS `total_books`" .
+						" (SELECT COUNT(`id`) FROM `books` WHERE `books`.`category` = `category`.`id` ) AS `total_books`" .
 						" FROM `category` $limitStr")->result();
 	}
 	
 	public function getById($id) {
 		return $this->db->query("SELECT `category`.`id`, `category`.`name`, `category`.`permalink`, " .
-						" (SELECT COUNT(`id`) FROM `books` WHERE `books`.`id_category` = `category`.`id` ) AS `total_books`" .
+						" (SELECT COUNT(`id`) FROM `books` WHERE `books`.`category` = `category`.`id` ) AS `total_books`" .
 						" WHERE `category`.`id` = $this->db->escape($id) " .
 						" FROM `category`")->row();
 	}

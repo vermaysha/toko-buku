@@ -32,3 +32,23 @@ if ( ! function_exists('active_sidebar')) {
 		return isset($urlArray[1]) && $urlArray[1] == $name ? 'active' : null;
 	}
 }
+
+if ( ! function_exists('get_image')) {
+	function get_image($path, $size = 60) {
+		$info = pathinfo($path);
+		$dir = $info['dirname'];
+		$ext = $info['extension'];
+		$file = $info['filename'];
+		
+		return $dir . '/'. $file . '-' . $size . 'x'. $size. '.'.$ext;
+	}
+}
+
+if ( ! function_exists('get_pp')) {
+	function get_pp($photos, $size = 60) {
+		$photos = explode('.', $photos);
+		$photo = $photos[0];
+		$ext = $photos[1];
+		return 'uploads/photos/'.$photo.'-'.$size.'x'.$size.'.'.$ext;
+	}
+}

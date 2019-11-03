@@ -43,7 +43,7 @@ class UsersModel extends CI_Model
 						->row();
 	}
 	
-	public function insert($username, $password, $data = []) {
+	public function insert($username, $password, $level, $data = []) {
 		$status = $this->db->insert('users', [
 			'username' => $username,
 			'password' => password_hash($password, PASSWORD_ARGON2I),
@@ -66,5 +66,36 @@ class UsersModel extends CI_Model
 	
 	public function updateLastLogin($username) {
 		return $this->db->set('last_login', date('Y-m-d H:i:s'))->where('username', $username)->update('users');
+	}
+	
+	public function getAll($offset = null, $limit = null) {
+		$users = [];
+		if ( ! empty($limit)) {
+			$this->db->limit($limit, $offset);
+		}
+		$query = $this->db->get('users')->result();
+		for ($i=0; $i < count($query); $i++) { 
+			foreach ($query[$i] as $k => $user) {
+				$users[$i][$k] = $user;
+			}
+			foreach ($this->db->where('id_user', $query[$i]->id)->get('users_meta')->result() as $meta) {
+				$users[$i][$meta->meta_key] = $meta->meta_value;
+			}
+		}
+		
+		return $users;
+	}
+	
+	public function getById($id) {
+		$users = [];
+		$this->db->where('id', $id);
+		$query = $this->db->get('users')->row();
+		foreach ($query as $k => $user) {
+			$users[$k] = $user;
+		}
+		foreach ($this->db->where('id_user', $query->id)->get('users_meta')->result() as $meta) {
+			$users[$meta->meta_key] = $meta->meta_value;
+		}
+		return $users;
 	}
 }
